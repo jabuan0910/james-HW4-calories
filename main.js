@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial update to total calories display
     updateTotalCalories();
-    
+
     // Event listener for form submission
     form.addEventListener('submit', (event) => {
         event.preventDefault();
@@ -40,3 +40,5 @@ document.addEventListener('DOMContentLoaded', () => {
         form.reset();
     });
 });
+
+
