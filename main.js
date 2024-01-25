@@ -1,44 +1,42 @@
-function toggleSection(section) {
-    // Disable all sections
-    document.getElementById("section1").disabled = true;
-    document.getElementById("section2").disabled = true;
-    document.getElementById("section3").disabled = true;
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('calorieForm');
+    const totalCaloriesDiv = document.getElementById('totalCalories');
 
-    document.getElementById("section1").classList.add("disabled");
-    document.getElementById("section2").classList.add("disabled");
-    document.getElementById("section3").classList.add("disabled");
-
-    // Enable the selected section
-    if (section === 1) {
-        document.getElementById("section2").disabled = false;
-        document.getElementById("section2").classList.remove("disabled");
-    } else if (section === 2) {
-        document.getElementById("section3").disabled = false;
-        document.getElementById("section3").classList.remove("disabled");
+    // Constructor for Food
+    function Food(name, pCalories) {
+        this.name = name;
+        this.calories = parseInt(pCalories);
     }
-}
 
-function registerUser() {
-    const username = document.getElementById("newUsername").value;
-    const password = document.getElementById("newPassword").value;
-    const city = document.getElementById("city").value;
-    const state = document.getElementById("state").value;
-
-    localStorage.setItem("username", username);
-    localStorage.setItem("password", password);
-    localStorage.setItem("city", city);
-    localStorage.setItem("state", state);
-
-    alert("Welcome " + username);
-}
-
-function loginUser() {
-    const username = document.getElementById("existingUsername").value;
-    const password = document.getElementById("existingPassword").value;
-
-    if (username === localStorage.getItem("username") && password === localStorage.getItem("password")) {
-        alert("Welcome back " + username);
-    } else {
-        alert("Invalid");
+    // Function to update total calories display
+    function updateTotalCalories() {
+        const totalCalories = foodArray.reduce((acc, food) => acc + food.calories, 0);
+        totalCaloriesDiv.textContent = `Total Calories: ${totalCalories}`;
     }
-}
+
+    // Initialize foodArray with two items
+    const foodArray = [
+        new Food('Banana', 100),
+        new Food('Hot Dog', 370)
+    ];
+
+    // Initial update to total calories display
+    updateTotalCalories();
+    
+    // Event listener for form submission
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        
+        const foodName = document.getElementById('foodName').value;
+        const calories = document.getElementById('calories').value;
+        
+        const foodItem = new Food(foodName, calories);
+        foodArray.push(foodItem);
+
+        console.log(foodArray);
+        updateTotalCalories();
+
+        // Reset form
+        form.reset();
+    });
+});
