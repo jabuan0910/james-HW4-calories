@@ -1,7 +1,8 @@
 # james-HW4-calories
+
 Homework 4 for DEV209
 
-# Calorie Tracking Program
+## Calorie Tracking Program
 
 This project contains a simple web application that helps users track their calorie intake.
 
